@@ -1,0 +1,28 @@
+ services:
+  appdb:  
+    image: mongo:latest 
+    ports:  
+    - "27017:27017"  
+    volumes:  
+    - './data:/data/db'
+    environment:
+      - MONGO_INITDB_DATABASE=development
+  backend:
+    image: node:latest 
+    build: ./backend
+    command: bash -c "nc -zvv localhost 27017; npm install; nodemon app.js --color=always"  
+    ports:  
+    - "3001:3000"  
+    - "5858:5858"  
+    volumes:  
+    - ./backend:/usr/src/app  
+    depends_on:
+      - appdb
+  frontend:
+    image: node:latest 
+    build: ./frontend
+    command: bash -c "npm run dev"  
+    ports:  
+    - "3000:3000"
+    volumes:  
+    - ./frontend:/usr/src/app
