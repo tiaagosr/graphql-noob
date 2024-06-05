@@ -1,6 +1,8 @@
 # Intro
 Just a simple GraphQL (ExpressJS) + React (NextJS) playground, using the simplest replicable infra. Batteries included!
 
+Code examples retrieved from "The GraphQL Guide" (2020).
+
 # Requirements
 - Docker
 
